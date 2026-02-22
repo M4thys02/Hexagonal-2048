@@ -4,6 +4,15 @@ import numpy as np
 import random as r
 import sys
 import pyjokes
+import os
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 pg.init()
 
@@ -152,15 +161,15 @@ class MainGame():
         self.okno = pg.display.set_mode((self.sirka_okna, self.vyska_okna))
         pg.display.set_caption("Hexagonal 2048")
 
-        hex_2 = pg.image.load("images/hex_2_button.png").convert_alpha()
-        hex_3 = pg.image.load("images/hex_3_button.png").convert_alpha()
-        hex_5 = pg.image.load("images/hex_5_button.png").convert_alpha()
-        menu_b = pg.image.load("images/menu_button.png").convert_alpha()
-        end_try = pg.image.load("images/end_try_button.png").convert_alpha()
-        small_menu = pg.image.load("images/small_menu_button.png").convert_alpha()
-        rules = pg.image.load("images/rules_button.png").convert_alpha()
-        out = pg.image.load("images/exit_button.png").convert_alpha()
-        win = pg.image.load("images/win_button.png").convert_alpha()
+        hex_2 = pg.image.load(resource_path("images/hex_2_button.png")).convert_alpha()
+        hex_3 = pg.image.load(resource_path("images/hex_3_button.png")).convert_alpha()
+        hex_5 = pg.image.load(resource_path("images/hex_5_button.png")).convert_alpha()
+        menu_b = pg.image.load(resource_path("images/menu_button.png")).convert_alpha()
+        end_try = pg.image.load(resource_path("images/end_try_button.png")).convert_alpha()
+        small_menu = pg.image.load(resource_path("images/small_menu_button.png")).convert_alpha()
+        rules = pg.image.load(resource_path("images/rules_button.png")).convert_alpha()
+        out = pg.image.load(resource_path("images/exit_button.png")).convert_alpha()
+        win = pg.image.load(resource_path("images/win_button.png")).convert_alpha()
 
         self.hex_2_button = Button(100, 150, hex_2)
         self.hex_3_button = Button(200, 150, hex_3)
@@ -173,9 +182,9 @@ class MainGame():
         self.win_button = Button(175, 460, win)
 
         # Blok pro načtení fontu - pokud má hráč font již nainstalovaný, stačí použít zakomentované příkazy
-        self.font_big = pg.font.Font("zektonbo.ttf", 49) # self.font_big = pg.font.SysFont("zekton", 49, True)
-        self.font_medium = pg.font.Font("zektonbo.ttf", 25) # self.font_medium = pg.font.SysFont("zekton", 25, True)
-        self.font_small = pg.font.Font("zektonbo.ttf", 16) # self.font_small = pg.font.SysFont("zekton", 16, True)
+        self.font_big = pg.font.Font(resource_path("zektonbo.ttf"), 49) # self.font_big = pg.font.SysFont("zekton", 49, True)
+        self.font_medium = pg.font.Font(resource_path("zektonbo.ttf"), 25) # self.font_medium = pg.font.SysFont("zekton", 25, True)
+        self.font_small = pg.font.Font(resource_path("zektonbo.ttf"), 16) # self.font_small = pg.font.SysFont("zekton", 16, True)
 
 
     def WriteText(self, hod_pole, y, x): # Funkce pro vypsání textu do středu všech šestiúhelníků
@@ -190,7 +199,7 @@ class MainGame():
 
             # Blok pro vypsání textu - zobrazí text na konkrétní souřadnice
             # fnt = pg.font.SysFont("zekton", m, True) # Příkaz pokud má dotyčný hráč font předinstalovaný na svém PC
-            fnt = pg.font.Font("zektonbo.ttf", m)
+            fnt = pg.font.Font(resource_path("zektonbo.ttf"), m)
             napis_co = fnt.render(f"{hod_pole}", True, colors[hod_pole])
 
             if x == 0:
@@ -491,7 +500,7 @@ class MainGame():
             m = 17 - (delka_hod - 13)
         
         # fnt = pg.font.SysFont("zekton", m, True)
-        fnt = pg.font.Font("zektonbo.ttf", m)
+        fnt = pg.font.Font(resource_path("zektonbo.ttf"), m)
         napis_co = fnt.render(f"{self.highest_number}", True, colors[self.highest_number])
         napis_kam = napis_co.get_rect(center = (250,275))
         self.okno.blit(source = napis_co, dest = napis_kam)
@@ -523,7 +532,7 @@ class MainGame():
 
         self.Add_number() # Přidání čísla
 
-        helping = pg.image.load("images/helping_movement.png").convert_alpha()
+        helping = pg.image.load(resource_path("images/helping_movement.png")).convert_alpha()
 
         pg.display.update()
 
@@ -642,7 +651,7 @@ class MainGame():
         self.okno.fill((50,50,50))
 
         self.small_menu_button.make_button(self.okno)
-        picture = pg.image.load("images/directions.png").convert_alpha()
+        picture = pg.image.load(resource_path("images/directions.png")).convert_alpha()
         self.okno.blit(picture, (125, 175))
         self.okno.blit(self.font_medium.render("RULES OF THE GAME", True, (255, 255, 255)), (120, 10))
         self.okno.blit(self.font_small.render("Each letter indicates a direction for the movement", True, (255, 255, 255)), (50, 50))
