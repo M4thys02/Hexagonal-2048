@@ -31,8 +31,7 @@ The goal is to **combine tiles to reach the 2048 value**. The game ends when no 
 
 **Windows Build: https://github.com/M4thys02/Hexagonal-2048/releases/tag/v1.0**
 
-Download and run the executable directly: Hexagonal_2048_build/dist/main.exe
-No installation required. Simply launch the `.exe` and start playing.
+Download and run the executable directly: `Hexagonal_2048_build/dist/main.exe`
 
 ---
 
